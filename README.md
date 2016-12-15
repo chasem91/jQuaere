@@ -40,7 +40,7 @@ $l accepts a string, callback or HTMLElement as an argument. In the case of a st
 ```
 
 #### $l.ajax(options)
-Opens and sends an XHR(XML Http Request) supplied with default defined as an object of which its values may be overwritten by passing in a custom `options` object.
+Opens and sends an XHR(XML Http Request) supplied with default parameters where are defined as an object which may be overwritten by passing in a custom `options` object.
 
 ```javascript
 $l.extend = (firstObj, ...otherObjs) => {
