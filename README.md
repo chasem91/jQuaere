@@ -13,7 +13,7 @@ Alternatively, you may save 'jquaere.js'(found in the 'lib' folder) to your proj
 
 ### Overview
 
-#### $l(selector)
+#### $l(arg)
 
 $l accepts a string, callback or HTMLElement as an argument. In the case of a string or HTMLElement, an instance of DOMNodeCollection is returned. A DOMNodeCollection allows the user to manipulate a collection of HTML elements in various ways(The DOMNodeCollection API is described in further detail below). If a callback is passed in, the callback will be added to a queue of callbacks to be invoked once the DOM has fully loaded. If the DOM has already loaded, the callback will not be queued and will instead be invoked immediately.
 
@@ -28,13 +28,20 @@ $l accepts a string, callback or HTMLElement as an argument. In the case of a st
       callbacks.forEach( callback => callback() );
     });
 
-    window.$l = selector => {
-      if(typeof selector === "string") {
-        return new DOMNodeCollection(Array.from(document.querySelectorAll(selector)));
-      } else if (typeof selector === "function") {
-        if (docReady) selector(); else callbacks.push(selector);
-      } else if (selector instanceof HTMLElement) {
-        return new DOMNodeCollection([selector]);
+    window.$l = arg => {
+      if(typeof arg === "string") {
+        let htmlElements = [];
+        if (arg[0] === "<" && arg[arg.length - 1] === ">") {
+          const tagText = arg.substr(1, arg.length - 2);
+          htmlElements = [document.createElement(tagText)];
+        } else {
+          htmlElements = Array.from(document.querySelectorAll(arg));
+        }
+        return new DOMNodeCollection(htmlElements);
+      } else if (typeof arg === "function") {
+        if (docReady) arg(); else callbacks.push(arg);
+      } else if (arg instanceof HTMLElement) {
+        return new DOMNodeCollection([arg]);
       }
     };
 ```
