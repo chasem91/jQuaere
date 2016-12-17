@@ -15,7 +15,7 @@ Alternatively, you may save 'jquaere.js'(found in the 'lib' folder) to your proj
 
 #### $l(arg)
 
-$l accepts a string, callback or HTMLElement as an argument. In the case of a string or HTMLElement, an instance of DOMNodeCollection is returned. A DOMNodeCollection allows the user to manipulate a collection of HTML elements in various ways(The DOMNodeCollection API is described in further detail below). If a callback is passed in, the callback will be added to a queue of callbacks to be invoked once the DOM has fully loaded. If the DOM has already loaded, the callback will not be queued and will instead be invoked immediately.
+$l accepts a string, callback or HTMLElement as an argument. In the case of a string or HTMLElement, an instance of DOMNodeCollection is returned. If the string is of the form \`<${tagName}>\`, a new detached element will be created with `tagName` as the element type and returned as a DOMNodeCollection. A DOMNodeCollection allows the user to manipulate a collection of HTML elements in various ways(The DOMNodeCollection API is described in further detail below). If a callback is passed in, the callback will be added to a queue of callbacks to be invoked once the DOM has fully loaded. If the DOM has already loaded, the callback will not be queued and will instead be invoked immediately.
 
 ```javascript
     const DOMNodeCollection = require('./dom_node_collection');
